@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 6</title>
+</head>
+<body>
+  <h2>Exercise 6 : Rudolf</h2>
+  <div id="result"></div>
+
+  <script>
+    const details = {};
+    let count = Number(prompt("Combien de mots veux-tu entrer pour ta phrase ?"));
+
+    for (let i = 0; i < count; i++) {
+      let key = prompt(`Mot clé ${i+1}:`);
+      let value = prompt(`Valeur du mot ${i+1}:`);
+      details[key] = value;
+    }
+
+    let sentence = "";
+    for (let key in details) {
+      sentence += key + " " + details[key] + " ";
+    }
+
+    document.getElementById("result").innerHTML = sentence.trim();
+  </script>
+</body>
+</html>
