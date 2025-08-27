@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise People Interactive</title>
+</head>
+<body>
+  <script>
+    let people = ["Greg", "Mary", "Devon", "James"];
+    console.log("Initial list:", people);
+
+    // Part I – Arrays
+    if (prompt("Do you want to remove someone? (yes/no)").toLowerCase() === "yes") {
+      let toRemove = prompt("Enter a name to remove:");
+      if (people.includes(toRemove)) {
+        people.splice(people.indexOf(toRemove), 1);
+        console.log(`${toRemove} removed.`, people);
+      } else {
+        console.log(`${toRemove} not found.`);
+      }
+    }
+
+    if (prompt("Do you want to replace a name? (yes/no)").toLowerCase() === "yes") {
+      let toUpdate = prompt("Enter the name to replace:");
+      if (people.includes(toUpdate)) {
+        let newName = prompt(`Enter the new name for ${toUpdate}:`);
+        people[people.indexOf(toUpdate)] = newName;
+        console.log(`${toUpdate} replaced by ${newName}.`, people);
+      } else {
+        console.log(`${toUpdate} not found.`);
+      }
+    }
+
+    if (prompt("Do you want to add your name? (yes/no)").toLowerCase() === "yes") {
+      let yourName = prompt("Enter your name:");
+      people.push(yourName);
+      console.log(`${yourName} added.`, people);
+    }
+
+    if (prompt("Do you want to see the index of Mary? (yes/no)").toLowerCase() === "yes") {
+      console.log("Index of Mary:", people.indexOf("Mary"));
+    }
+
+    if (prompt("Do you want to make a copy without first and last? (yes/no)").toLowerCase() === "yes") {
+      let copyPeople = people.slice(1, -1);
+      console.log("Copy:", copyPeople);
+    }
+
+    if (prompt("Do you want to check the index of Foo? (yes/no)").toLowerCase() === "yes") {
+      console.log("Index of Foo:", people.indexOf("Foo"));
+    }
+
+    if (prompt("Do you want to see the last element? (yes/no)").toLowerCase() === "yes") {
+      console.log("Last element:", people[people.length - 1]);
+    }
+
+    // Part II – Loops
+    if (prompt("Do you want to iterate through all people? (yes/no)").toLowerCase() === "yes") {
+      console.log("Iterating through all people:");
+      for (let person of people) {
+        console.log(person);
+      }
+    }
+
+    if (prompt("Do you want to stop iterating after Devon? (yes/no)").toLowerCase() === "yes") {
+      console.log("Iterating and stopping after Devon:");
+      for (let person of people) {
+        console.log(person);
+        if (person === "Devon") break;
+      }
+    }
+
+    console.log("Final list:", people);
+  </script>
+</body>
+</html>
