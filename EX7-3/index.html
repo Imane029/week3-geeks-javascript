@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 7</title>
+</head>
+<body>
+  <h2>Exercise 7 : Secret Group</h2>
+  <div id="result"></div>
+
+  <script>
+    let count = Number(prompt("Combien de noms d'amis veux-tu entrer ?"));
+    const names = [];
+
+    for (let i = 0; i < count; i++) {
+      names.push(prompt(`Nom de l'ami ${i+1}:`));
+    }
+
+    let societyName = names
+      .map(name => name[0].toUpperCase())
+      .sort()
+      .join('');
+
+    document.getElementById("result").innerHTML = 
+      "Nom de la société secrète : " + societyName;
+  </script>
+</body>
+</html>

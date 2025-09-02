@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 5</title>
+</head>
+<body>
+  <h2>Exercise 5 : Family</h2>
+  <div id="result"></div>
+
+  <script>
+    let output = "";
+    const family = {};
+    let members = Number(prompt("Combien de membres dans la famille ?"));
+
+    for (let i = 0; i < members; i++) {
+      let role = prompt(`Rôle du membre ${i+1} (ex: father, mother):`);
+      let name = prompt(`Nom du membre ${i+1}:`);
+      family[role] = name;
+    }
+
+    output += "<strong>Clés :</strong><br>";
+    for (let key in family) {
+      output += key + "<br>";
+    }
+
+    output += "<br><strong>Valeurs :</strong><br>";
+    for (let key in family) {
+      output += family[key] + "<br>";
+    }
+
+    document.getElementById("result").innerHTML = output;
+  </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice interactif</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            text-align: center;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result-container {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Exercice de substitution de phrase</h1>
+    <p>Entrez une phrase contenant "not" et "bad", puis cliquez sur "Vérifier".</p>
+
+    <input type="text" id="user-sentence" placeholder="Ex: This movie is not that bad !">
+    <button onclick="checkSentence()">Vérifier</button>
+
+    <div id="result-container">
+        <p id="original-sentence"></p>
+        <p id="result-sentence"></p>
+    </div>
+
+    <script>
+        function checkSentence() {
+           
+            let sentence = document.getElementById("user-sentence").value;
+
+            
+            let wordNot = sentence.indexOf("not");
+            let wordBad = sentence.indexOf("bad");
+
+           
+            document.getElementById("original-sentence").textContent = "Phrase originale : " + sentence;
+
+            
+            if (wordNot !== -1 && wordBad !== -1 && wordBad > wordNot) {
+                let firstPart = sentence.substring(0, wordNot);
+                let lastPart = sentence.substring(wordBad + 3);
+                let newSentence = firstPart + "good" + lastPart;
+                
+                
+                document.getElementById("result-sentence").textContent = "Résultat : " + newSentence;
+            } else {
+                
+                document.getElementById("result-sentence").textContent = "Résultat : La phrase n'a pas été modifiée.";
+            }
+        }
+    </script>
+
+</body>
+</html>
