@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motifs en Étoile</title>
+    <style>
+        body {
+            font-family: monospace;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        pre {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            display: inline-block;
+            text-align: left;
+            margin: 20px;
+            line-height: 1.5;
+        }
+        h2 {
+            color: #61dafb;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Exercice de motifs en étoile</h1>
+    
+
+    <hr>
+    
+    <h2>1. Motif avec une seule boucle</h2>
+    <pre id="single-loop-output"></pre>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const singleLoopOutput = document.getElementById('single-loop-output');
+            let pattern = "";
+            for (let i = 0; i < 6; i++) {
+                pattern += "* ";
+                singleLoopOutput.textContent += pattern + "\n";
+            }
+        });
+    </script>
+
+    <hr>
+
+    <h2>2. Motif avec des boucles imbriquées</h2>
+    <pre id="nested-loops-output"></pre>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nestedLoopsOutput = document.getElementById('nested-loops-output');
+            for (let i = 1; i <= 6; i++) {
+                let row = "";
+                for (let j = 0; j < i; j++) {
+                    row += "* ";
+                }
+                nestedLoopsOutput.textContent += row + "\n";
+            }
+        });
+    </script>
+
+</body>
+</html>
