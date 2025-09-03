@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>What's in my wallet?</title>
+</head>
+<body>
+  <h2> Exercice d achat </h2>
+
+  <label>Prix de l'article ($): </label>
+  <input type="number" id="itemPrice" step="0.01"><br><br>
+
+  <label>Quarters (0.25) : </label>
+  <input type="number" id="quarters" value="0"><br><br>
+
+  <label>Dimes (0.10) : </label>
+  <input type="number" id="dimes" value="0"><br><br>
+
+  <label>Nickels (0.05) : </label>
+  <input type="number" id="nickels" value="0"><br><br>
+
+  <label>Pennies (0.01) : </label>
+  <input type="number" id="pennies" value="0"><br><br>
+
+  <button onclick="checkWallet()">Vérifier</button>
+
+  <h3 id="result"></h3>
+
+  <script>
+    function changeEnough(itemPrice, amountOfChange) {
+      const [quarters, dimes, nickels, pennies] = amountOfChange;
+
+      const total =
+        (quarters * 0.25) +
+        (dimes * 0.10) +
+        (nickels * 0.05) +
+        (pennies * 0.01);
+
+      return total >= itemPrice;
+    }
+
+    function checkWallet() {
+      const itemPrice = parseFloat(document.getElementById("itemPrice").value);
+      const quarters = parseInt(document.getElementById("quarters").value) || 0;
+      const dimes = parseInt(document.getElementById("dimes").value) || 0;
+      const nickels = parseInt(document.getElementById("nickels").value) || 0;
+      const pennies = parseInt(document.getElementById("pennies").value) || 0;
+
+      const canBuy = changeEnough(itemPrice, [quarters, dimes, nickels, pennies]);
+
+      const result = document.getElementById("result");
+      if (canBuy) {
+        result.textContent = "✅ Tu peux acheter l'article !";
+        result.style.color = "green";
+      } else {
+        result.textContent = "❌ Tu n'as pas assez d'argent.";
+        result.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>

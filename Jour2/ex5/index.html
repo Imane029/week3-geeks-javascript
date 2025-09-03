@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 5 : Users Interactif</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+
+    <div id="container" class="bg-blue-200 p-5 rounded-lg mb-6 shadow-md">
+        <h1 class="text-xl font-bold">Utilisateurs:</h1>
+    </div>
+
+    <ul class="list bg-white rounded-lg p-4 mb-4 shadow-md">
+        <li class="p-2 border border-gray-300 rounded-md mb-2">John</li>
+        <li class="p-2 border border-gray-300 rounded-md mb-2">Pete</li>
+    </ul>
+
+    <ul class="list bg-white rounded-lg p-4 mb-4 shadow-md">
+        <li class="p-2 border border-gray-300 rounded-md mb-2">David</li>
+        <li class="p-2 border border-gray-300 rounded-md mb-2">Sarah</li>
+        <li class="p-2 border border-gray-300 rounded-md mb-2">Dan</li>
+    </ul>
+
+    
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold mb-4">Manipuler les utilisateurs</h2>
+        
+        <div class="mb-4">
+            <h3 class="font-medium mb-2">Modifier un nom</h3>
+            <div class="flex flex-col sm:flex-row gap-2">
+                <input type="text" id="nameToChange" placeholder="Nom à remplacer" class="flex-1 p-2 border rounded-md">
+                <input type="text" id="newName" placeholder="Nouveau nom" class="flex-1 p-2 border rounded-md">
+                <button id="btnChange" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors">Modifier</button>
+            </div>
+        </div>
+        
+        <div class="mb-4">
+            <h3 class="font-medium mb-2">Supprimer un utilisateur</h3>
+            <div class="flex flex-col sm:flex-row gap-2">
+                <input type="text" id="nameToDelete" placeholder="Nom à supprimer" class="flex-1 p-2 border rounded-md">
+                <button id="btnDelete" class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition-colors">Supprimer</button>
+            </div>
+        </div>
+
+        <div id="messageBox" class="mt-4 p-3 rounded-md hidden"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const containerDiv = document.getElementById("container");
+            const btnChange = document.getElementById("btnChange");
+            const btnDelete = document.getElementById("btnDelete");
+            const nameToChangeInput = document.getElementById("nameToChange");
+            const newNameInput = document.getElementById("newName");
+            const nameToDeleteInput = document.getElementById("nameToDelete");
+            const messageBox = document.getElementById("messageBox");
+
+           
+            function showMessage(message, type = 'info') {
+                messageBox.textContent = message;
+                messageBox.classList.remove('hidden', 'bg-red-200', 'bg-green-200');
+                if (type === 'error') {
+                    messageBox.classList.add('bg-red-200', 'text-red-800');
+                } else if (type === 'success') {
+                    messageBox.classList.add('bg-green-200', 'text-green-800');
+                } else {
+                    messageBox.classList.add('bg-blue-200', 'text-blue-800');
+                }
+            }
+
+            // Changer un nom
+            btnChange.addEventListener('click', () => {
+                const nameToChange = nameToChangeInput.value.trim();
+                const newName = newNameInput.value.trim();
+                
+                if (!nameToChange || !newName) {
+                    showMessage("Veuillez saisir les deux noms.", 'error');
+                    return;
+                }
+
+                const listItems = document.querySelectorAll('.list li');
+                let found = false;
+                listItems.forEach(li => {
+                    if (li.textContent.trim() === nameToChange) {
+                        li.textContent = newName;
+                        found = true;
+                    }
+                });
+
+                if (found) {
+                    showMessage(`Le nom "${nameToChange}" a été changé en "${newName}".`, 'success');
+                } else {
+                    showMessage(`L'utilisateur "${nameToChange}" n'a pas été trouvé.`, 'error');
+                }
+            });
+
+            
+            btnDelete.addEventListener('click', () => {
+                const nameToDelete = nameToDeleteInput.value.trim();
+                
+                if (!nameToDelete) {
+                    showMessage("Veuillez saisir le nom à supprimer.", 'error');
+                    return;
+                }
+
+                const listItems = document.querySelectorAll('.list li');
+                let found = false;
+                listItems.forEach(li => {
+                    if (li.textContent.trim() === nameToDelete) {
+                        li.parentElement.removeChild(li);
+                        found = true;
+                    }
+                });
+
+                if (found) {
+                    showMessage(`L'utilisateur "${nameToDelete}" a été supprimé.`, 'success');
+                } else {
+                    showMessage(`L'utilisateur "${nameToDelete}" n'a pas été trouvé.`, 'error');
+                }
+            });
+
+            
+            document.querySelectorAll("ul.list").forEach(ul => {
+                ul.classList.add("student_list");
+            });
+
+            const firstUl = document.querySelector("ul.list:first-of-type");
+            if (firstUl) {
+                firstUl.classList.add("university", "attendance");
+            }
+            
+            
+            document.body.style.fontSize = "18px";
+            
+           
+            if (containerDiv && window.getComputedStyle(containerDiv).backgroundColor === "rgb(173, 216, 230)") {
+                const users = document.querySelectorAll("ul.list:first-of-type li");
+                const x = users[0] ? users[0].textContent.trim() : 'Utilisateur 1';
+                const y = users[1] ? users[1].textContent.trim() : 'Utilisateur 2';
+                const dialogBox = document.createElement('div');
+                dialogBox.className = "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 bg-white rounded-lg shadow-2xl z-50 text-center";
+                dialogBox.innerHTML = `
+                    <p class="mb-4">Bonjour ${x} et ${y}</p>
+                    <button onclick="this.parentElement.remove()" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors">Fermer</button>
+                `;
+                document.body.appendChild(dialogBox);
+            }
+        });
+    </script>
+</body>
+</html>

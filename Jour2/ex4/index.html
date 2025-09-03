@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercice 4 : Vacations Costs</title>
+</head>
+<body>
+  <h1>Exercice 4 : Vacations Costs</h1>
+  <script>
+   
+    function hotelCost() {
+      let nights;
+      do {
+        nights = prompt("Combien de nuits veux-tu rester à l'hôtel ?");
+      } while (isNaN(nights) || nights === "" || nights === null);
+
+      return Number(nights) * 140;
+    }
+
+    function planeRideCost() {
+      let destination;
+      do {
+        destination = prompt("Quelle est ta destination ?");
+      } while (!isNaN(destination) || destination === "" || destination === null);
+
+      destination = destination.toLowerCase();
+      if (destination === "london") {
+        return 183;
+      } else if (destination === "paris") {
+        return 220;
+      } else {
+        return 300;
+      }
+    }
+
+    
+    function rentalCarCost() {
+      let days;
+      do {
+        days = prompt("Combien de jours veux-tu louer la voiture ?");
+      } while (isNaN(days) || days === "" || days === null);
+
+      days = Number(days);
+      let cost = days * 40;
+
+      if (days > 10) {
+        cost *= 0.95;
+      }
+      return cost;
+    }
+
+    
+    function totalVacationCost() {
+      let hotel = hotelCost();
+      let plane = planeRideCost();
+      let car = rentalCarCost();
+
+      alert(`Le coût de l'hôtel est : $${hotel}
+        Le coût du billet d'avion est : $${plane}
+        Le coût de la voiture est : $${car}
+------------------------
+Coût total des vacances : $${hotel + plane + car}`);
+    }
+
+    totalVacationCost();
+  </script>
+</body>
+</html>

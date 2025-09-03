@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 4</title>
+</head>
+<body>
+  <h2>Exercise 4 : Building Management</h2>
+  <div id="result"></div>
+
+  <script>
+    let output = "";
+
+    const numberOfFloors = Number(prompt("Combien d'étages a le bâtiment ?"));
+
+    const numberOfAptByFloor = {
+      firstFloor: Number(prompt("Nombre d'appartements au 1er étage :")),
+      secondFloor: Number(prompt("Nombre d'appartements au 2ème étage :")),
+      thirdFloor: Number(prompt("Nombre d'appartements au 3ème étage :")),
+      fourthFloor: Number(prompt("Nombre d'appartements au 4ème étage :")),
+    };
+
+    const nameOfTenants = [
+      prompt("Nom du 1er locataire :"),
+      prompt("Nom du 2ème locataire :"),
+      prompt("Nom du 3ème locataire :")
+    ];
+
+    const numberOfRoomsAndRent = {};
+    for (let tenant of nameOfTenants) {
+      let rooms = Number(prompt(`Nombre de pièces pour ${tenant} :`));
+      let rent = Number(prompt(`Loyer de ${tenant} :`));
+      numberOfRoomsAndRent[tenant.toLowerCase()] = [rooms, rent];
+    }
+
+    output += "Nombre d'étages : " + numberOfFloors + "<br>";
+    output += "Appartements au 1er étage : " + numberOfAptByFloor.firstFloor + "<br>";
+    output += "Appartements au 3ème étage : " + numberOfAptByFloor.thirdFloor + "<br>";
+    output += "2ème locataire : " + nameOfTenants[1] + "<br>";
+    output += "Nombre de pièces du 2ème locataire : " + numberOfRoomsAndRent[nameOfTenants[1].toLowerCase()][0] + "<br>";
+
+    let sarahRent = numberOfRoomsAndRent[nameOfTenants[0].toLowerCase()][1];
+    let davidRent = numberOfRoomsAndRent[nameOfTenants[2].toLowerCase()][1];
+    let danRent = numberOfRoomsAndRent[nameOfTenants[1].toLowerCase()][1];
+
+    if (sarahRent + davidRent > danRent) {
+      numberOfRoomsAndRent[nameOfTenants[1].toLowerCase()][1] = 1200;
+    }
+
+    output += "Nouveau loyer du 2ème locataire : " + numberOfRoomsAndRent[nameOfTenants[1].toLowerCase()][1];
+
+    document.getElementById("result").innerHTML = output;
+  </script>
+</body>
+</html>
