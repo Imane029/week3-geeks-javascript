@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Challenge: Create a solar system</title>
+        <style>
+            body {
+                background-color: black;
+                padding: 10px;
+                color: white;
+                font-family: Arial, sans-serif;
+                
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+            }
+            
+            .listPlanets {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 30px;
+                padding: 20px;
+            }
+            .planet {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                text-align: center;
+                padding: 10px;
+                position: relative;
+                border: 2px solid white;
+                overflow: visible;
+                
+                transition: transform 0.3s ease-in-out;
+                cursor: pointer;
+            }
+            .planet:hover {
+                transform: scale(1.1);
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            }
+            .planet h4 {
+                margin: 0;
+                line-height: 100px;
+                z-index: 1;
+            }
+            .moon {
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background: rgb(237, 237, 237);
+                border: 5px solid red;
+                font-size: 8px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: black;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+
+    <section class="listPlanets"></section>
+
+    <script>
+        const sectionPlanetes = document.querySelector('.listPlanets');
+
+        const systemeSolaire = [
+            { nom: 'Mercure', couleur: 'grey', lunes: [] },
+            { nom: 'Vénus', couleur: 'sandybrown', lunes: [] },
+            { nom: 'Terre', couleur: 'royalblue', lunes: ['Lune'] },
+            { nom: 'Mars', couleur: 'firebrick', lunes: ['Phobos', 'Deimos'] },
+            { nom: 'Jupiter', couleur: 'peru', lunes: ['Io', 'Europe', 'Ganymède', 'Callisto'] },
+            { nom: 'Saturne', couleur: 'khaki', lunes: ['Titan', 'Rhéa', 'Japet', 'Dioné', 'Téthys'] },
+            { nom: 'Uranus', couleur: 'lightblue', lunes: ['Titania', 'Obéron', 'Umbriel', 'Ariel', 'Miranda'] },
+            { nom: 'Neptune', couleur: 'darkblue', lunes: ['Triton', 'Néréide'] }
+        ];
+
+        for (const planete of systemeSolaire) {
+            const divPlanete = document.createElement('div');
+            divPlanete.classList.add('planet');
+            divPlanete.style.backgroundColor = planete.couleur;
+
+            const nomPlanete = document.createElement('h4');
+            nomPlanete.textContent = planete.nom;
+            divPlanete.appendChild(nomPlanete);
+
+            for (let i = 0; i < planete.lunes.length; i++) {
+                const lune = planete.lunes[i];
+                const divLune = document.createElement('div');
+                divLune.classList.add('moon');
+                divLune.textContent = lune;
+                
+                const rayon = 80;
+                const angle = (360 / planete.lunes.length) * i;
+                const angleEnRadians = (angle * Math.PI) / 180;
+
+                const posX = 50 + rayon * Math.cos(angleEnRadians) - 15;
+                const posY = 50 + rayon * Math.sin(angleEnRadians) - 15;
+
+                divLune.style.left = `${posX}px`;
+                divLune.style.top = `${posY}px`;
+                
+                divPlanete.appendChild(divLune);
+            }
+            
+            sectionPlanetes.appendChild(divPlanete);
+        }
+    </script>
+    </body>
+</html>
