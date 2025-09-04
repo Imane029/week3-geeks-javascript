@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 2 - Supprimer les couleurs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        input[type="button"] {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="button"]:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+    <form>
+        <select id="colorSelect">
+            <option>Red</option>
+            <option>Green</option>
+            <option>White</option>
+            <option>Black</option>
+        </select>
+        <input type="button" value="Select and Remove">
+    </form>
+
+    <script>
+        function removecolor() {
+            const selectElement = document.getElementById('colorSelect');
+            const selectedIndex = selectElement.selectedIndex;
+            
+            if (selectedIndex !== -1) {
+                selectElement.options[selectedIndex].remove();
+            }
+        }
+
+        const removeButton = document.querySelector('input[type="button"]');
+        removeButton.addEventListener('click', removecolor);
+    </script>
+
+</body>
+</html>

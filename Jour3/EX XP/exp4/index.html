@@ -1,0 +1,80 @@
+<!doctype html> 
+<html lang="en"> 
+    <head> 
+        <meta charset="utf-8"> 
+        <title>Volume of a Sphere</title> 
+        <style>  
+            body {
+                padding-top:30px;
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+            } 
+            
+            form {
+                background: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            label, input {
+                display: block;
+                width: 100%;
+                box-sizing: border-box; 
+                margin-bottom: 10px;
+            }
+            
+            input[type="text"] {
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            input[type="submit"] {
+                background-color: #333;
+                color: #fff;
+                border: none;
+                padding: 10px 15px;
+                cursor: pointer;
+                border-radius: 4px;
+            }
+        </style> 
+    </head> 
+    <body> 
+        <p>Input radius value and get the volume of a sphere.</p> 
+        <form  id="MyForm"> 
+            <label for="radius">Radius</label><input type="text" name="radius" id="radius" required> 
+            <label for="volume">Volume</label><input type="text" name="volume" id="volume"  readonly> 
+            <input type="submit" value="Calculate" id="submit">    
+        </form> 
+        
+        <script>
+            
+            const form = document.getElementById('MyForm');
+            const radiusInput = document.getElementById('radius');
+            const volumeInput = document.getElementById('volume');
+
+            
+            form.addEventListener('submit', function(event) {
+                
+                event.preventDefault();
+                const radius = parseFloat(radiusInput.value);
+
+                
+                if (!isNaN(radius) && radius >= 0) {
+                    
+                    const volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
+                    
+                    
+                    volumeInput.value = volume.toFixed(4);
+                } else {
+                    
+                    alert("Veuillez entrer une valeur de rayon valide (un nombre positif).");
+                    volumeInput.value = ""; 
+                }
+            });
+        </script>
+    </body> 
+</html>

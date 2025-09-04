@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 1 - Sélection de Musique</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            cursor: pointer;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Sélectionner votre genre de musique</h2>
+    <select id="genres">
+      <option value="rock">Rock</option>
+      <option value="blues" selected>Blues</option>
+    </select>
+    <p>Valeur sélectionnée : <span id="selectedValue"></span></p>
+
+    <script>
+        const selectGenre = document.getElementById('genres');
+        const selectedValueSpan = document.getElementById('selectedValue');
+
+        
+        function updateDisplay() {
+            selectedValueSpan.textContent = selectGenre.options[selectGenre.selectedIndex].value;
+        }
+
+        
+        updateDisplay();
+
+       
+        const classicOption = document.createElement('option');
+        classicOption.value = 'classic';
+        classicOption.textContent = 'Classic';
+        selectGenre.appendChild(classicOption);
+
+        
+        classicOption.selected = true;
+        updateDisplay();
+
+        
+        selectGenre.addEventListener('change', updateDisplay);
+    </script>
+
+</body>
+</html>

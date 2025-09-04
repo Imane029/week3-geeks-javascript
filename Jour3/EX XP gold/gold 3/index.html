@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            padding-top: 50px;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+        }
+        #root {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 400px;
+        }
+        form {
+            display: flex;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            margin-left: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #clearAllButton {
+            background-color: #dc3545;
+        }
+        #clearAllButton:hover {
+            background-color: #c82333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+        li {
+            background-color: #e9ecef;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script>
+        let shoppingList = [];
+        const rootDiv = document.getElementById('root');
+
+        function renderList() {
+            let listContainer = document.querySelector('.shopping-list-container');
+            if (listContainer) {
+                listContainer.remove();
+            }
+
+            if (shoppingList.length > 0) {
+                listContainer = document.createElement('div');
+                listContainer.classList.add('shopping-list-container');
+                const ul = document.createElement('ul');
+                shoppingList.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    ul.appendChild(li);
+                });
+                listContainer.appendChild(ul);
+                rootDiv.appendChild(listContainer);
+            }
+        }
+
+        function addItem(event) {
+            event.preventDefault();
+            const itemInput = document.getElementById('itemInput');
+            if (itemInput.value.trim() !== '') {
+                shoppingList.push(itemInput.value.trim());
+                itemInput.value = '';
+                renderList();
+            }
+        }
+
+        function clearAll() {
+            shoppingList = [];
+            renderList();
+        }
+
+       
+        const form = document.createElement('form');
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.id = 'itemInput';
+        input.placeholder = 'Entrer un article';
+
+        const addButton = document.createElement('button');
+        addButton.textContent = 'AddItem';
+        addButton.addEventListener('click', addItem);
+
+        const clearButton = document.createElement('button');
+        clearButton.textContent = 'ClearAll';
+        clearButton.id = 'clearAllButton';
+        clearButton.addEventListener('click', clearAll);
+
+        const heading = document.createElement('h2');
+        heading.textContent = 'Liste de courses';
+
+        rootDiv.appendChild(heading);
+        rootDiv.appendChild(form);
+        rootDiv.appendChild(clearButton);
+
+        form.appendChild(input);
+        form.appendChild(addButton);
+    </script>
+</body>
+</html>

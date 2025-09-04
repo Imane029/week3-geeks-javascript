@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadre de mots</title>
+    <style>
+        body {
+            background-color: #282c34;
+            color: #abb2bf;
+            font-family: monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        pre {
+            background-color: #1e2125;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            white-space: pre;
+        }
+
+        h1 {
+            color: #61afef;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #98c379;
+            color: #282c34;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cadre de mots</h1>
+    <pre id="output"></pre>
+    <button onclick="generateFrame()">Générer le cadre</button>
+
+    <script>
+        function generateFrame() {
+            let input = prompt("Entrez plusieurs mots séparés par des virgules :");
+            
+            if (input === null || input.trim() === "") {
+                document.getElementById('output').innerText = "Veuillez entrer des mots.";
+                return;
+            }
+
+            let words = input.split(',').map(word => word.trim());
+            let maxLength = 0;
+            words.forEach(word => {
+                if (word.length > maxLength) {
+                    maxLength = word.length;
+                }
+            });
+
+            let frameWidth = maxLength + 4;
+            let topBottomLine = "*".repeat(frameWidth);
+            let frameContent = [topBottomLine];
+
+            words.forEach(word => {
+                let spacesNeeded = maxLength - word.length;
+                let spaces = " ".repeat(spacesNeeded);
+                frameContent.push(`* ${word}${spaces} *`);
+            });
+
+            frameContent.push(topBottomLine);
+
+            document.getElementById('output').innerText = frameContent.join('\n');
+        }
+    </script>
+</body>
+</html>

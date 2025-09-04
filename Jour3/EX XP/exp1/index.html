@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice DOM</title>
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        article {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            cursor: pointer;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* Classe pour le bonus de fondu du 2e paragraphe */
+        .fade-out {
+            transition: opacity 2s ease-in-out;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <article>
+        <h1> Some Facts </h1>
+        <h2> The Chocolate </h2>
+        <h3> History of the chocolate </h3>
+        <p> Chocolate is made from tropical Theobroma cacao tree seeds. 
+        Its earliest use dates back to the Olmec civilization in Mesoamerica.</p>
+        <p> After the European discovery of the Americas, chocolate became 
+        very popular in the wider world, and its demand exploded. </p>
+        <p> Chocolate has since become a popular food product that millions enjoy every day, 
+        thanks to its unique, rich, and sweet taste.</p> 
+        <p> But what effect does eating chocolate have on our health?</p> 
+    </article>
+
+    <button id="boldBtn">Rendre les paragraphes gras</button>
+
+    <script>
+       
+        let h1 = document.querySelector('h1');
+        console.log(h1);
+
+       
+        let paragraphs = document.querySelectorAll('p');
+        let lastParagraph = paragraphs[paragraphs.length - 1];
+        lastParagraph.remove();
+
+        
+        let h2 = document.querySelector('h2');
+        h2.addEventListener('click', function() {
+          h2.style.backgroundColor = 'red';
+        });
+
+        
+        let h3 = document.querySelector('h3');
+        h3.addEventListener('click', function() {
+          h3.style.display = 'none';
+        });
+
+        
+        let boldBtn = document.getElementById('boldBtn');
+        let isBold = false; 
+
+        boldBtn.addEventListener('click', function() {
+          let allParagraphs = document.querySelectorAll('p');
+          
+          if (!isBold) {
+           
+            allParagraphs.forEach(p => {
+              p.style.fontWeight = 'bold';
+            });
+            boldBtn.textContent = 'Revenir à l\'écriture normale';
+          } else {
+            
+            allParagraphs.forEach(p => {
+              p.style.fontWeight = 'normal';
+            });
+            boldBtn.textContent = 'Rendre les paragraphes gras';
+          }
+          
+          isBold = !isBold; 
+        });
+
+        
+        h1.addEventListener('mouseover', function() {
+          let randomSize = Math.floor(Math.random() * 101);
+          h1.style.fontSize = randomSize + 'px';
+        });
+        h1.addEventListener('mouseout', function() {
+          h1.style.fontSize = ''; 
+        });
+
+        
+        let secondParagraph = document.querySelector('article p:nth-child(2)');
+        secondParagraph.addEventListener('mouseover', function() {
+          secondParagraph.classList.add('fade-out');
+        });
+    </script>
+
+</body>
+</html>
