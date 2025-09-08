@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Coloring Squares</title>
+  <style>
+    body {
+      display: flex;
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      height: 100vh;
+    }
+
+    
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(3, 60px); 
+      gap: 4px;
+      padding: 8px;
+      background: #aaa;
+      align-content: start;
+      width: 200px; 
+      box-sizing: border-box;
+    }
+
+    .btn-clear {
+      grid-column: span 3;
+      height: 60px;
+      font-size: 22px;
+      cursor: pointer;
+      background: #eee;
+      border: 2px solid gray;
+      border-radius: 6px;
+    }
+
+    .color {
+      width: 60px;
+      height: 60px;
+      border: 2px solid #555;
+      cursor: pointer;
+    }
+
+    /* Grille */
+    .grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(70, 20px); 
+      grid-template-rows: repeat(30, 20px);    
+      margin: 5px;
+      background: white;
+      border: 2px solid gray;
+    }
+
+    .cell {
+      background: white;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="palette">
+    <button class="btn-clear">Clair</button>
+
+    <div class="color" style="background:red"></div>
+    <div class="color" style="background:orange"></div>
+    <div class="color" style="background:gold"></div>
+
+    <div class="color" style="background:yellow"></div>
+    <div class="color" style="background:yellowgreen"></div>
+    <div class="color" style="background:lightgreen"></div>
+
+    <div class="color" style="background:green"></div>
+    <div class="color" style="background:turquoise"></div>
+    <div class="color" style="background:cyan"></div>
+
+    <div class="color" style="background:lightskyblue"></div>
+    <div class="color" style="background:dodgerblue"></div>
+    <div class="color" style="background:blue"></div>
+
+    <div class="color" style="background:darkblue"></div>
+    <div class="color" style="background:indigo"></div>
+    <div class="color" style="background:purple"></div>
+
+    <div class="color" style="background:violet"></div>
+    <div class="color" style="background:pink"></div>
+    <div class="color" style="background:lightgray"></div>
+
+    <div class="color" style="background:gray"></div>
+    <div class="color" style="background:black"></div>
+    <div class="color" style="background:white; border:2px solid black"></div>
+  </div>
+
+  <div class="grid"></div>
+
+  <script>
+    const grid = document.querySelector('.grid');
+    const colors = document.querySelectorAll('.color');
+    const clearBtn = document.querySelector('.btn-clear');
+    let currentColor = 'black';
+    let drawing = false;
+
+    
+    for (let i = 0; i < 70 * 30; i++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      grid.appendChild(cell);
+
+      cell.addEventListener('mousedown', () => {
+        drawing = true;
+        cell.style.background = currentColor;
+      });
+      cell.addEventListener('mouseover', () => {
+        if (drawing) {
+          cell.style.background = currentColor;
+        }
+      });
+    }
+
+    document.body.addEventListener('mouseup', () => drawing = false);
+
+    
+    colors.forEach(color => {
+      color.addEventListener('click', () => {
+        currentColor = color.style.background;
+      });
+    });
+
+   
+    clearBtn.addEventListener('click', () => {
+      document.querySelectorAll('.cell').forEach(cell => {
+        cell.style.background = "white";
+      });
+    });
+  </script>
+
+</body>
+</html>
